@@ -136,24 +136,34 @@ def user_choice_4() -> None:
         user_choice_4()
 
 
-def all_choices(user_choice: str) -> None:
+def all_choices() -> None:
     """
     Функция агрегатор выборов пользователя
-    :param user_choice: str, Выбор клиента
+
     :return: None
     """
-    if user_choice == '1':
-        user_choice_1()
+    while True:
+        print('\nВарианты действий:')
+        print('Узнать баланс: 1')
+        print('Добавление записи: 2')
+        print('Редактирование записи: 3')
+        print('Поиск по записям: 4')
+        print('Введите "exit" для выхода \n')
+        user_choice = input('Введите число 1, 2, 3 или 4: ')
+        if user_choice == '1':
+            user_choice_1()
 
-    elif user_choice == '2':
-        user_choice_2()
+        elif user_choice == '2':
+            user_choice_2()
 
-    elif user_choice == '3':
-        user_choice_3()
+        elif user_choice == '3':
+            user_choice_3()
 
-    elif user_choice == '4':
-        user_choice_4()
+        elif user_choice == '4':
+            user_choice_4()
+        elif user_choice.lower() == 'exit':
+            break
 
-    else:
-        print('Ошибка ввода!')
-        print('Введите целое число от 1 до 4')
+        else:
+            print('Ошибка ввода!')
+            print('Введите целое число от 1 до 4')
