@@ -3,19 +3,29 @@ from services import (id_count,
                       new_data,
                       INCOME,
                       EXPENSE,
-                      balance_update,
                       data_update,
                       category_search,
                       date_search,
-                      summ_search, )
+                      summ_search,
+                      current_balance)
 
 
 def user_choice_1() -> None:
-    with open('balance.txt', 'r') as file:
-        print(f'Текущий баланс: {file.read()}')
+    """
+    Функция для вывода баланса пользователя
+    :return: None
+    """
+    balance, income, expense = current_balance()
+    print(f'Общий баланс: {balance}')
+    print(f'Общие доходы: {income}')
+    print(f'Общие расходы: {expense}')
 
 
 def user_choice_2() -> None:
+    """
+    Функция для создания новых записей о расходах или доходах
+    :return: None
+    """
     print('Варианты действий:')
     print('Новая запись с доходами: 1')
     print('Новая запись с расходами: 2')
@@ -39,10 +49,6 @@ def user_choice_2() -> None:
             op_name=INCOME,
             date=current_date
         )
-        balance_update(
-            summ=new_summ,
-            op_name=INCOME,
-        )
 
     elif user_choice == '2':
         new_description = input('Введите описание расходов: ')
@@ -63,10 +69,6 @@ def user_choice_2() -> None:
             op_name=EXPENSE,
             date=current_date
         )
-        balance_update(
-            summ=new_summ,
-            op_name=EXPENSE,
-        )
 
     else:
         print('Ошибка ввода!')
@@ -75,6 +77,10 @@ def user_choice_2() -> None:
 
 
 def user_choice_3() -> None:
+    """
+    Функция для редактирования записей о расходах или доходах
+    :return: None
+    """
     user_choice = input('Введите id записи для редактирования: ')
     data_update(
         choice=user_choice
@@ -82,6 +88,10 @@ def user_choice_3() -> None:
 
 
 def user_choice_4() -> None:
+    """
+    Функция для поиска записей о расходах или доходах
+    :return: None
+    """
     print('Введите 1 для поиска по категории')
     print('Введите 2 для поиска по дате')
     print('Введите 3 для поиска по сумме')
@@ -127,6 +137,11 @@ def user_choice_4() -> None:
 
 
 def all_choices(user_choice: str) -> None:
+    """
+    Функция агрегатор выборов пользователя
+    :param user_choice: str, Выбор клиента
+    :return: None
+    """
     if user_choice == '1':
         user_choice_1()
 
@@ -142,6 +157,3 @@ def all_choices(user_choice: str) -> None:
     else:
         print('Ошибка ввода!')
         print('Введите целое число от 1 до 4')
-
-
-
